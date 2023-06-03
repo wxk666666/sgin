@@ -2,28 +2,29 @@ package main
 
 import (
 	"SGin/sgin8"
+	"SGin/sgin8/middleware"
 	"net/http"
 )
 
 func main() {
 	//eg1:
 	r := sgin8.Default()
-	config1 := sgin8.DefaultCorsConfig()
-	cors1 := sgin8.Cors{}
+	config1 := middleware.DefaultCorsConfig()
+	cors1 := middleware.Cors{}
 	cors1.SetCorsConfig(config1)
 	r.Use(cors1.Apply())
 	//eg2
-	//r.Use(sgin8.DefaultCorsConfig().Build())
+	r.Use(middleware.DefaultCorsConfig().Build())
 	//eg3
-	config3 := sgin8.CorsConfig{}
-	config3.SetAccessControlMaxAge("200000").AddOrigins("*").SetAccessControlAllowCredentials(true).AddMethods("POST")
+	config3 := middleware.CorsConfig{}
+	config3.SetAccessControlMaxAge("200000").SetAccessControlAllowCredentials(true).AddMethods("GET", "POST")
 	r.Use(config3.Build())
 	//eg4
-	//config4 := &sgin8.CorsConfig{}
-	//config4.SetAccessControlMaxAge("200000").SetAccessControlAllowCredentials(true).AddMethods("GET", "POST")
-	//cors4 := sgin8.Cors{}
-	//cors4.SetCorsConfig(config4)
-	//cors4.Apply()
+	config4 := &middleware.CorsConfig{}
+	config4.SetAccessControlMaxAge("200000").SetAccessControlAllowCredentials(true).AddMethods("GET", "POST")
+	cors4 := middleware.Cors{}
+	cors4.SetCorsConfig(config4)
+	cors4.Apply()
 
 	r.GET("/", func(c *sgin8.Context) {
 		c.String(http.StatusOK, "Hello wxk\n")
