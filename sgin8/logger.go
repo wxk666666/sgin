@@ -1,13 +1,12 @@
-package middleware
+package sgin8
 
 import (
-	"SGin/sgin8"
 	"log"
 	"time"
 )
 
-func Logger() sgin8.HandlerFunc {
-	return func(c *sgin8.Context) {
+func Logger() HandlerFunc {
+	return func(c *Context) {
 		// Start timer
 		t := time.Now()
 		// Process request

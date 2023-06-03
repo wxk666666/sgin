@@ -1,7 +1,6 @@
 package sgin8
 
 import (
-	"SGin/sgin8/middleware"
 	"log"
 	"net/http"
 	"strings"
@@ -30,7 +29,7 @@ func New() *Engine {
 // Default use Logger() & Recovery middlewares
 func Default() *Engine {
 	engine := New()
-	engine.Use(middleware.Logger(), middleware.Recovery())
+	engine.Use(Logger(), Recovery())
 	return engine
 }
 

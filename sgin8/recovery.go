@@ -1,7 +1,6 @@
-package middleware
+package sgin8
 
 import (
-	"SGin/sgin8"
 	"fmt"
 	"log"
 	"net/http"
@@ -23,8 +22,8 @@ func trace(message string) string {
 	return str.String()
 }
 
-func Recovery() sgin8.HandlerFunc {
-	return func(c *sgin8.Context) {
+func Recovery() HandlerFunc {
+	return func(c *Context) {
 		defer func() {
 			if err := recover(); err != nil {
 				message := fmt.Sprintf("%s", err)

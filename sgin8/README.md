@@ -1,8 +1,7 @@
 # 概述
 本版本主要实现cors中间件
 ## 内容
-首先，创意一个middleware文件夹，以后我们的中间件将会放在这里面\
-创建我们的跨域中间件Cors\
+创建我们的跨域中间件Cors \
 
 我们了解到，当使用XMLHttpRequest发送请求时，如果浏览器发现违反了同源策略就会自动加上一个请求头 origin；
 后端在接受到请求后确定响应后会在 Response Headers 中加入一个属性 Access-Control-Allow-Origin；
@@ -135,20 +134,20 @@ demo:
 func main() {
 	//eg1:
 	r := sgin8.Default()
-	config1 := middleware.DefaultCorsConfig()
-	cors1 := middleware.Cors{}
+	config1 := sgin8.DefaultCorsConfig()
+	cors1 := sgin8.Cors{}
 	cors1.SetCorsConfig(config1)
 	r.Use(cors1.Apply())
 	//eg2
-	r.Use(middleware.DefaultCorsConfig().Build())
+	r.Use(sgin8.DefaultCorsConfig().Build())
 	//eg3
-	config3 := middleware.CorsConfig{}
+	config3 := sgin8.CorsConfig{}
 	config3.SetAccessControlMaxAge("200000").SetAccessControlAllowCredentials(true).AddMethods("GET", "POST")
 	r.Use(config3.Build())
 	//eg4
-	config4 := &middleware.CorsConfig{}
+	config4 := &sgin8.CorsConfig{}
 	config4.SetAccessControlMaxAge("200000").SetAccessControlAllowCredentials(true).AddMethods("GET", "POST")
-	cors4 := middleware.Cors{}
+	cors4 := sgin8.Cors{}
 	cors4.SetCorsConfig(config4)
 	cors4.Apply()
 
@@ -164,6 +163,12 @@ func main() {
 	r.Run(":9999")
 }
 
+
 ```
 你也许会问为什么实现的这么繁琐，那么下文将会解释下原因！\
-外链：https://zhuanlan.zhihu.com/p/58093669
+外链：https://zhuanlan.zhihu.com/p/58093669 \
+跨域测试：
+失败情况：
+![img.png](..%2Fimage%2Fimg.png)
+成功情况!
+[img_1.png](..%2Fimage%2Fimg_1.png)

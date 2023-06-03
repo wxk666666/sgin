@@ -1,7 +1,6 @@
-package middleware
+package sgin8
 
 import (
-	"SGin/sgin8"
 	"log"
 	"net/http"
 	"strconv"
@@ -45,7 +44,7 @@ func (c *CorsConfig) SetAccessControlAllowCredentials(isAllow bool) *CorsConfig 
 	c.AccessControlAllowCredentials = isAllow
 	return c
 }
-func (c *CorsConfig) Build() sgin8.HandlerFunc {
+func (c *CorsConfig) Build() HandlerFunc {
 	cors := &Cors{}
 	cors.SetCorsConfig(c)
 	return cors.Apply()
@@ -81,8 +80,8 @@ func (cors *Cors) SetCorsConfig(c *CorsConfig) {
 	cors.AllowMethods = c.AllowMethods
 	cors.AccessControlAllowCredentials = c.AccessControlAllowCredentials
 }
-func (cors *Cors) Apply() sgin8.HandlerFunc {
-	return func(context *sgin8.Context) {
+func (cors *Cors) Apply() HandlerFunc {
+	return func(context *Context) {
 		method := context.Req.Method
 		origin := context.Req.Header.Get("Origin")
 
