@@ -1,7 +1,7 @@
 package main
 
 import (
-	"SGin/sgin8"
+	"SGin/sgin"
 	"net/http"
 )
 
