@@ -1,4 +1,4 @@
-package sg
+package SGin
 
 import "strings"
 
