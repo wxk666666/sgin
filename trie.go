@@ -1,4 +1,4 @@
-package SGin
+package sgin
 
 import "strings"
 
