@@ -1,3 +1,3 @@
-module SGin
+module sgin
 
 go 1.20
