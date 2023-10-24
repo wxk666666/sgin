@@ -1,7 +1,6 @@
 package main
 
 import (
-	"SGin/sgin"
 	"net/http"
 )
 

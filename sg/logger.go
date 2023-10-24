@@ -1,4 +1,4 @@
-package sgin
+package sg
 
 import (
 	"log"
