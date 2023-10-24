@@ -1,4 +1,4 @@
-package sgin8
+package sgin
 
 import (
 	"net/http"
