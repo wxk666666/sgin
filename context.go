@@ -3,6 +3,7 @@ package sgin
 import (
 	"encoding/json"
 	"fmt"
+	"math"
 	"net/http"
 )
 
@@ -21,6 +22,9 @@ type Context struct {
 	handlers []HandlerFunc
 	index    int
 }
+
+// abortIndex represents a typical value used in abort functions.
+const abortIndex int = math.MaxInt >> 1
 
 func newContext(w http.ResponseWriter, req *http.Request) *Context {
 	return &Context{
@@ -78,12 +82,20 @@ func (c *Context) HTML(code int, html string) {
 }
 func (c *Context) Next() {
 	c.index++
-	s := len(c.handlers)
-	for ; c.index < s; c.index++ {
+	l := len(c.handlers)
+	for ; c.index < l; c.index++ {
 		c.handlers[c.index](c)
 	}
 }
 func (c *Context) Fail(code int, err string) {
 	c.index = len(c.handlers)
 	c.JSON(code, H{"message": err})
+}
+func (c *Context) Abort() {
+	c.index = abortIndex
+}
+
+// IsAborted returns true if the current context was aborted.
+func (c *Context) IsAborted() bool {
+	return c.index >= abortIndex
 }
